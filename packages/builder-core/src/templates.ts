@@ -895,6 +895,317 @@ function linkText(id: string, label: string): Block {
   };
 }
 
+function iconCards(): SectionTemplate {
+  return {
+    id: "icon-cards",
+    name: "Icon Cards",
+    description: "Grid of icon cards with descriptions.",
+    category: "Features",
+    root: "section-icon-cards",
+    blocks: {
+      "section-icon-cards": {
+        id: "section-icon-cards",
+        type: "section",
+        name: "Icon Cards",
+        children: ["container-icon-cards"],
+        style: sectionPaddingStyle({
+          display: "flex",
+          flexDirection: "column",
+          background: "#ffffff",
+          color: colorTokens.primaryText
+        })
+      },
+      "container-icon-cards": {
+        id: "container-icon-cards",
+        type: "container",
+        name: "Icon Cards Layout",
+        children: ["text-icon-cards-title", "container-icon-grid"],
+        style: contentWidthStyle("wide", {
+          display: "flex",
+          flexDirection: "column",
+          gap: layoutTokens.gapSection
+        })
+      },
+      "text-icon-cards-title": {
+        id: "text-icon-cards-title",
+        type: "text",
+        name: "Section Title",
+        content: { text: "Why choose us" },
+        style: headingSectionStyle()
+      },
+      "container-icon-grid": {
+        id: "container-icon-grid",
+        type: "container",
+        name: "Icon Grid",
+        children: ["icon-card-1", "icon-card-2", "icon-card-3", "icon-card-4"],
+        meta: { repeatable: true },
+        style: {
+          base: {
+            display: "grid",
+            gridTemplateColumns: "repeat(2, 1fr)",
+            gap: layoutTokens.gapGridX
+          },
+          overrides: {
+            mobile: { gridTemplateColumns: "1fr" }
+          }
+        }
+      },
+      ...iconCard("icon-card-1", "🛡️", "Enterprise Security", "Bank-level encryption protects your data with industry-leading standards."),
+      ...iconCard("icon-card-2", "⚡", "Lightning Fast", "Optimized performance for the best user experience."),
+      ...iconCard("icon-card-3", "🔧", "Easy Integration", "Simple APIs and SDKs for seamless integration."),
+      ...iconCard("icon-card-4", "📊", "Analytics Built-in", "Track and measure everything out of the box.")
+    }
+  };
+}
+
+function iconCard(id: string, icon: string, title: string, description: string): Record<string, Block> {
+  return {
+    [id]: {
+      id,
+      type: "container",
+      name: title,
+      children: [`${id}-icon`, `${id}-title`, `${id}-desc`],
+      style: cardSurfaceStyle({
+        display: "flex",
+        flexDirection: "column",
+        gap: "12px",
+        padding: "24px"
+      })
+    },
+    [`${id}-icon`]: {
+      id: `${id}-icon`,
+      type: "text",
+      name: "Icon",
+      content: { text: icon },
+      style: { base: { fontSize: "28px" } }
+    },
+    [`${id}-title`]: {
+      id: `${id}-title`,
+      type: "text",
+      name: "Title",
+      content: { text: title },
+      style: headingCardStyle()
+    },
+    [`${id}-desc`]: {
+      id: `${id}-desc`,
+      type: "text",
+      name: "Description",
+      content: { text: description },
+      style: bodyTextStyle()
+    }
+  };
+}
+
+function faqSection(): SectionTemplate {
+  return {
+    id: "faq",
+    name: "FAQ",
+    description: "Frequently asked questions.",
+    category: "Content",
+    root: "section-faq",
+    blocks: {
+      "section-faq": {
+        id: "section-faq",
+        type: "section",
+        name: "FAQ",
+        children: ["container-faq"],
+        style: sectionPaddingStyle({
+          display: "flex",
+          flexDirection: "column",
+          background: colorTokens.lightBg,
+          color: colorTokens.primaryText
+        })
+      },
+      "container-faq": {
+        id: "container-faq",
+        type: "container",
+        name: "FAQ Layout",
+        children: ["text-faq-title", "container-faq-items"],
+        style: contentWidthStyle("reading", {
+          display: "flex",
+          flexDirection: "column",
+          gap: layoutTokens.gapSection
+        })
+      },
+      "text-faq-title": {
+        id: "text-faq-title",
+        type: "text",
+        name: "FAQ Title",
+        content: { text: "Frequently Asked Questions" },
+        style: headingSectionStyle()
+      },
+      "container-faq-items": {
+        id: "container-faq-items",
+        type: "container",
+        name: "FAQ Items",
+        children: ["faq-item-1", "faq-item-2", "faq-item-3"],
+        meta: { repeatable: true },
+        style: {
+          base: {
+            display: "flex",
+            flexDirection: "column",
+            gap: layoutTokens.gapTight
+          }
+        }
+      },
+      ...faqItem("faq-item-1", "What is included in the starter plan?", "The starter plan includes all core features plus priority email support and up to 3 team members."),
+      ...faqItem("faq-item-2", "Can I upgrade my plan later?", "Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately."),
+      ...faqItem("faq-item-3", "Do you offer refunds?", "We offer a 30-day money-back guarantee. If you're not satisfied, contact support for a full refund.")
+    }
+  };
+}
+
+function faqItem(id: string, question: string, answer: string): Record<string, Block> {
+  return {
+    [id]: {
+      id,
+      type: "container",
+      name: "FAQ Item",
+      children: [`${id}-question`, `${id}-answer`],
+      style: {
+        base: {
+          display: "flex",
+          flexDirection: "column",
+          gap: "8px",
+          padding: "20px",
+          background: "#ffffff",
+          borderRadius: "12px",
+          border: `1px solid ${colorTokens.border}`
+        }
+      }
+    },
+    [`${id}-question`]: {
+      id: `${id}-question`,
+      type: "text",
+      name: "Question",
+      content: { text: question },
+      style: headingCardStyle()
+    },
+    [`${id}-answer`]: {
+      id: `${id}-answer`,
+      type: "text",
+      name: "Answer",
+      content: { text: answer },
+      style: bodyTextStyle()
+    }
+  };
+}
+
+function comparisonTable(): SectionTemplate {
+  return {
+    id: "comparison-table",
+    name: "Comparison Table",
+    description: "Compare features across plans.",
+    category: "Pricing",
+    root: "section-comparison",
+    blocks: {
+      "section-comparison": {
+        id: "section-comparison",
+        type: "section",
+        name: "Comparison",
+        children: ["container-comparison"],
+        style: sectionPaddingStyle({
+          display: "flex",
+          flexDirection: "column",
+          background: "#ffffff",
+          color: colorTokens.primaryText
+        })
+      },
+      "container-comparison": {
+        id: "container-comparison",
+        type: "container",
+        name: "Comparison Layout",
+        children: ["text-comparison-title", "container-comparison-grid"],
+        style: contentWidthStyle("wide", {
+          display: "flex",
+          flexDirection: "column",
+          gap: layoutTokens.gapSection
+        })
+      },
+      "text-comparison-title": {
+        id: "text-comparison-title",
+        type: "text",
+        name: "Title",
+        content: { text: "Compare our plans" },
+        style: headingSectionStyle()
+      },
+      "container-comparison-grid": {
+        id: "container-comparison-grid",
+        type: "container",
+        name: "Comparison Grid",
+        children: ["comparison-header", "comparison-row-1", "comparison-row-2", "comparison-row-3"],
+        style: {
+          base: {
+            display: "flex",
+            flexDirection: "column",
+            border: `1px solid ${colorTokens.border}`,
+            borderRadius: "16px",
+            overflow: "hidden"
+          }
+        }
+      },
+      ...comparisonRow("comparison-header", "", ["Starter", "Pro", "Enterprise"], true),
+      ...comparisonRow("comparison-row-1", "Team members", ["3", "10", "Unlimited"], false),
+      ...comparisonRow("comparison-row-2", "Storage", ["5GB", "50GB", "Unlimited"], false),
+      ...comparisonRow("comparison-row-3", "Support", ["Email", "Priority", "Dedicated"], false)
+    }
+  };
+}
+
+function comparisonRow(id: string, label: string, values: string[], isHeader: boolean): Record<string, Block> {
+  const blocks: Record<string, Block> = {
+    [id]: {
+      id,
+      type: "container",
+      name: isHeader ? "Header Row" : label,
+      children: [`${id}-label`, `${id}-col1`, `${id}-col2`, `${id}-col3`],
+      style: {
+        base: {
+          display: "grid",
+          gridTemplateColumns: "1fr repeat(3, 120px)",
+          gap: "0",
+          background: isHeader ? colorTokens.lightBg : "#ffffff",
+          borderBottom: `1px solid ${colorTokens.border}`
+        },
+        overrides: {
+          mobile: { gridTemplateColumns: "1fr repeat(3, 80px)" }
+        }
+      }
+    },
+    [`${id}-label`]: {
+      id: `${id}-label`,
+      type: "text",
+      name: "Label",
+      content: { text: label },
+      style: {
+        base: {
+          padding: "16px 20px",
+          fontWeight: isHeader ? "600" : "400",
+          fontSize: "14px"
+        }
+      }
+    }
+  };
+  values.forEach((value, i) => {
+    blocks[`${id}-col${i + 1}`] = {
+      id: `${id}-col${i + 1}`,
+      type: "text",
+      name: `Column ${i + 1}`,
+      content: { text: value },
+      style: {
+        base: {
+          padding: "16px 20px",
+          textAlign: "center",
+          fontWeight: isHeader ? "600" : "400",
+          fontSize: "14px",
+          borderLeft: `1px solid ${colorTokens.border}`
+        }
+      }
+    };
+  });
+  return blocks;
+}
+
 function attachCardText(template: SectionTemplate, bodyMap?: Record<string, string>) {
   const blocks = template.blocks;
   const cardIds = Object.keys(blocks).filter((id) => id.startsWith("card-"));
@@ -918,6 +1229,9 @@ const pricing = pricingCards();
 const cta = ctaBanner();
 const stats = statsRow();
 const footer = footerSection();
+const iconCardsSection = iconCards();
+const faq = faqSection();
+const comparison = comparisonTable();
 attachCardText(features, {
   "card-1": "Build sections in minutes.",
   "card-2": "Desktop, tablet, mobile ready.",
@@ -927,11 +1241,14 @@ attachCardText(features, {
 export const sectionTemplates: SectionTemplate[] = [
   hero,
   features,
+  iconCardsSection,
   logos,
   testimonials,
   pricing,
+  comparison,
   cta,
   stats,
+  faq,
   footer
 ];
 

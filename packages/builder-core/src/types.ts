@@ -44,6 +44,10 @@ export interface Style {
   alignItems?: AlignItems;
   justifyContent?: JustifyContent;
 
+  // Grid properties
+  gridTemplateColumns?: string;
+  gridTemplateRows?: string;
+
   background?: string;
   backgroundImage?: string;
   backgroundPosition?: string;
@@ -58,7 +62,12 @@ export interface Style {
 
   borderRadius?: string;
   border?: string;
+  borderLeft?: string;
+  borderRight?: string;
+  borderTop?: string;
+  borderBottom?: string;
   boxShadow?: string;
+  overflow?: "visible" | "hidden" | "scroll" | "auto";
   cssVars?: Record<string, string>;
 }
 

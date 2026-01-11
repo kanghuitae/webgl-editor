@@ -26,6 +26,8 @@ interface Style {
     gap?: string;
     alignItems?: AlignItems;
     justifyContent?: JustifyContent;
+    gridTemplateColumns?: string;
+    gridTemplateRows?: string;
     background?: string;
     backgroundImage?: string;
     backgroundPosition?: string;
@@ -39,7 +41,12 @@ interface Style {
     textAlign?: "left" | "center" | "right" | "justify";
     borderRadius?: string;
     border?: string;
+    borderLeft?: string;
+    borderRight?: string;
+    borderTop?: string;
+    borderBottom?: string;
     boxShadow?: string;
+    overflow?: "visible" | "hidden" | "scroll" | "auto";
     cssVars?: Record<string, string>;
 }
 type BlockType = "section" | "container" | "text" | "image" | "button";
