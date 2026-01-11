@@ -7,7 +7,7 @@ import {
   ResponsiveStyle,
   Style
 } from "./types";
-import { resolveStyle, styleToCss } from "./style";
+import { styleToCss } from "./style";
 
 export interface ExportResult {
   html: string;
