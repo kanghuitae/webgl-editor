@@ -1,4 +1,8 @@
 node_modules
 .DS_Store
-dist
 *.log
+
+# Exclude dist except for publishable packages
+dist
+!packages/pagegl-editor/dist
+!packages/builder-core/dist
