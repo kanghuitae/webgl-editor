@@ -24,8 +24,7 @@
     "demo": "vite --config vite.config.ts",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc -p tsconfig.json",
-    "prepack": "npm run build"
+    "typecheck": "tsc -p tsconfig.json"
   },
   "devDependencies": {
     "tsup": "^8.0.1",
