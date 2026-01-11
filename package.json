@@ -1,0 +1,17 @@
+{
+  "name": "pagegl-workspace",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm -ws run build",
+    "test": "npm -ws run test --if-present",
+    "typecheck": "npm -ws run typecheck",
+    "dev": "npm --workspace @pagegl/editor run dev",
+    "demo": "npm --workspace @pagegl/editor run demo",
+    "builder:dev": "npm --workspace @pagegl/builder run dev",
+    "builder:build": "npm --workspace @pagegl/builder run build"
+  }
+}
